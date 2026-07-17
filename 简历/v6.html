@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>韦文轩 — 嵌入式AI应用开发</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Reset ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#FAFAFA; --bg-card:#FFFFFF; --text:#09090B; --text-secondary:#3F3F46;
+  --text-muted:#71717A; --border:#E4E4E7; --accent:#FF6B35; --accent-hover:#E85A2A;
+  --placeholder-bg:#F4F4F5; --placeholder-text:#A1A1AA;
+  --font-title:48px; --font-sub:20px; --font-body:16px; --font-tag:13px; --font-sm:12px;
+  --sp-2:8px; --sp-3:16px; --sp-4:24px; --sp-5:32px; --sp-6:48px; --sp-7:64px; --sp-8:80px;
+  --max-w:1100px; --radius:12px;
+  transition:background .3s,color .3s,border-color .3s,box-shadow .3s
+}
+.dark{
+  --bg:#09090B; --bg-card:#18181B; --text:#FAFAFA; --text-secondary:#D4D4D8;
+  --text-muted:#71717A; --border:#27272A; --accent:#FF6B35; --accent-hover:#FF854F;
+  --placeholder-bg:#1A1A1E; --placeholder-text:#52525B;
+}
+body{font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+::selection{background:rgba(255,107,53,.25);color:var(--text)}
+/* ===== Layout ===== */
+.wrapper{position:relative;width:100vw;height:100vh;overflow:hidden}
+.page{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:40px;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s ease}
+.page.active{opacity:1;visibility:visible}
+.page-inner{max-width:var(--max-w);width:100%;margin:0 auto;opacity:0;transform:translateY(20px);transition:opacity .5s ease .12s,transform .5s ease .12s}
+.page.active .page-inner{opacity:1;transform:translateY(0)}
+/* ===== Nav ===== */
+.theme-btn{position:fixed;top:24px;right:24px;z-index:200;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;transition:all .25s}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--bg)}
+.nav-dots{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .3s;border:none;padding:0}
+.nav-dot.active{background:var(--accent);width:24px;border-radius:4px}
+.nav-dot:hover{background:var(--accent);opacity:.7}
+.nav-arrow{position:fixed;top:50%;z-index:100;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .25s;transform:translateY(-50%)}
+.nav-arrow:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.nav-arrow.hidden{opacity:0;pointer-events:none}
+.nav-arrow.prev{left:24px}.nav-arrow.next{right:24px}
+/* ===== Hero ===== */
+.hero{text-align:center;position:relative}
+.hero .geo{position:absolute;pointer-events:none;opacity:0}
+.hero .geo-l{position:absolute;top:64px;left:48px;pointer-events:none;width:1px;height:80px;background:var(--border)}
+.hero .geo-l::before{content:'';position:absolute;top:-1px;left:0;width:140px;height:1px;background:var(--border)}
+.hero .geo-r{position:absolute;bottom:64px;right:48px;pointer-events:none;width:1px;height:80px;background:var(--border)}
+.hero .geo-r::before{content:'';position:absolute;bottom:-1px;right:0;width:140px;height:1px;background:var(--border)}
+.hero h1{font-size:clamp(36px,4.5vw,var(--font-title));font-weight:800;letter-spacing:-.5px;margin-bottom:18px;line-height:1.15}
+.hero h1 span{background:linear-gradient(135deg,var(--text) 55%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .sub{font-size:clamp(16px,2vw,var(--font-sub));color:var(--text-secondary);font-weight:400;margin-bottom:20px;line-height:1.5}
+.hero .meta{font-size:var(--font-body);color:var(--text-muted);margin-bottom:var(--sp-7)}
+.hero .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 36px;border-radius:8px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;text-decoration:none;transition:all .25s;border:none;cursor:pointer;line-height:1}
+.hero .btn:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,107,53,.25)}
+/* ===== Projects ===== */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}
+.card{background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;transition:all .3s;cursor:default}
+.card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.dark .card:hover{box-shadow:0 12px 32px rgba(0,0,0,.3)}
+.card .thumb{aspect-ratio:16/10;background:var(--placeholder-bg);display:flex;align-items:center;justify-content:center;color:var(--placeholder-text);font-size:14px;border-bottom:1px solid var(--border);font-weight:500}
+.card .body{padding:var(--sp-4)}
+.card .badge{display:flex;align-items:center;gap:6px;font-size:var(--font-sm);color:var(--text-muted);margin-bottom:10px;font-weight:500;letter-spacing:.3px}
+.card .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.card h3{font-size:17px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.card .desc{font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:14px}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px}
+.card .tag{font-size:var(--font-sm);padding:3px 10px;border-radius:4px;background:rgba(255,107,53,.08);color:var(--accent);font-weight:600;line-height:1.4}
+/* ===== About ===== */
+.about-wrap{display:grid;grid-template-columns:55fr 45fr;gap:var(--sp-7);align-items:start}
+.about-left .intro{font-size:20px;font-weight:600;margin-bottom:var(--sp-4);line-height:1.5;color:var(--text)}
+.about-left .keys{display:flex;gap:var(--sp-2);margin-bottom:var(--sp-5)}
+.about-left .keys span{padding:5px 14px;border-radius:6px;border:1px solid var(--border);font-size:13px;color:var(--text-muted);font-weight:500}
+.about-left .desc{font-size:var(--font-body);color:var(--text-secondary);line-height:1.75;margin-bottom:var(--sp-5)}
+.about-left .chips{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
+.about-left .chips span{font-size:var(--font-tag);padding:5px 13px;border-radius:6px;background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);font-weight:500}
+.about-right .section-label{font-size:var(--font-sm);color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:var(--sp-4)}
+.about-right .row{display:flex;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.about-right .row:last-child{border-bottom:none}
+.about-right .key{font-size:var(--font-sm);color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;min-width:70px}
+.about-right .val{font-size:15px;color:var(--text);font-weight:500;word-break:break-all}
+/* ===== Mobile ===== */
+@media(max-width:768px){
+body{overflow-y:auto}.wrapper{height:auto;overflow:visible}
+.page{position:relative;opacity:1!important;visibility:visible!important;min-height:100vh;padding:56px 20px 80px;border-bottom:1px solid var(--border);display:flex;align-items:center}
+.page-inner{opacity:1!important;transform:none!important}
+.projects-grid{grid-template-columns:1fr;gap:var(--sp-3)}
+.about-wrap{grid-template-columns:1fr;gap:var(--sp-6)}
+.hero .geo-l,.hero .geo-r{display:none}
+.nav-arrow{display:none}
+.hero h1{font-size:36px}.hero .sub{font-size:17px}
+}
+/* ===== prefers-reduced-motion ===== */
+@media(prefers-reduced-motion:reduce){
+.page,.page-inner,.card,.nav-arrow,.hero .btn{transition:none!important}
+}
+::-webkit-scrollbar{width:0;height:0}
+
+.bg-circuit{position:fixed;inset:0;pointer-events:none;z-index:-1;color:var(--border)}
+.bg-circuit svg{width:100%;height:100%;opacity:.5}.dark .bg-circuit svg{opacity:.7}
+.hero-glow{position:fixed;top:50%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);pointer-events:none;z-index:-1;background:radial-gradient(circle,var(--hero-glow,var(--accent)) 0%,transparent 70%);border-radius:50%;opacity:0;transition:opacity .5s}.page.active .hero-glow{opacity:1}
+.dark{--bg:#050508;--bg-card:#0D0D12;--text:#F0F0F4;--text-secondary:#C8C8D0;--text-muted:#68687A;--border:#1A1A24}
+.hero .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero .btn-secondary{background:transparent;color:var(--text-secondary);border:1.5px solid var(--border)}
+.hero .btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.card .badge .type-icon{width:14px;height:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.card .badge .type-icon svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:2}
+.card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 20px 48px var(--glow),0 0 0 1px var(--accent) inset;transition:all .3s}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:8px}
+.skill-group{border-radius:8px;border:1px solid var(--border);padding:14px;background:var(--bg-card);transition:border-color .2s}
+.skill-group:hover{border-color:var(--accent)}
+.skill-group .sg-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.skill-group .sg-title .sg-icon{width:12px;height:12px;stroke:var(--accent);fill:none;stroke-width:2}
+.skill-group .sg-tags{display:flex;flex-wrap:wrap;gap:6px}
+.skill-group .sg-tag{font-size:13px;padding:4px 10px;border-radius:4px;background:var(--tag-bg,var(--tag-bg));color:var(--accent);font-weight:500;transition:all .2s;cursor:default}
+.skill-group .sg-tag:hover{transform:translateY(-1px);background:var(--glow-accent,rgba(255,107,53,.12))}
+.tool-icons{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.tool-icons .ti{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s;cursor:default}
+.tool-icons .ti svg{width:18px;height:18px;stroke:var(--text-muted);fill:none;stroke-width:1.5;transition:stroke .2s}
+.tool-icons .ti:hover{border-color:var(--accent);background:var(--tag-bg)}.tool-icons .ti:hover svg{stroke:var(--accent)}
+.card .thumb svg{width:100%;height:100%;display:block}.card .thumb{overflow:hidden}
+@media(max-width:768px){.skills-grid{grid-template-columns:1fr}.hero .btns{flex-direction:column;align-items:center}}
+@media(prefers-reduced-motion:reduce){.hero-glow{display:none}}
+
+</style>
+</head>
+<body>
+<div class="bg-circuit">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+<defs>
+<pattern id="pcb" width="80" height="80" patternUnits="userSpaceOnUse">
+<rect width="80" height="80" fill="none"/>
+<path d="M 40 0 L 40 80 M 0 40 L 80 40" stroke="currentColor" stroke-width="0.4" opacity="0.35"/>
+<circle cx="40" cy="40" r="2" fill="currentColor" opacity="0.15"/>
+<circle cx="0" cy="0" r="1.5" fill="currentColor" opacity="0.1"/>
+<circle cx="80" cy="0" r="1.5" fill="currentColor" opacity="0.1"/>
+<circle cx="0" cy="80" r="1.5" fill="currentColor" opacity="0.1"/>
+<circle cx="80" cy="80" r="1.5" fill="currentColor" opacity="0.1"/>
+<path d="M 0 0 L 20 20 M 60 20 L 80 0 M 0 80 L 20 60 M 60 60 L 80 80" stroke="currentColor" stroke-width="0.4" opacity="0.12"/>
+</pattern>
+</defs>
+<rect width="100%" height="100%" fill="url(#pcb)"/>
+</svg>
+</div>
+
+<div class="wrapper" id="wrapper">
+
+<button class="theme-btn" id="theme-btn" aria-label="切换主题">&#x25D0;</button>
+
+<!-- P1: Hero -->
+<section class="page active" data-page="0">
+<div class="page-inner hero">
+<div class="geo-l"></div><div class="geo-r"></div>
+<div class="hero-glow" id="heroGlow"></div>
+<h1><span>嵌入式AI应用开发</span></h1>
+<p class="sub">从STM32到QLoRA，全链路技术实践</p>
+<p class="meta">2026届 &middot; 大连大学 &middot; 电子信息工程</p>
+<a href="javascript:void(0)" class="btn" onclick="goPage(1)">查看项目 &darr;</a>
+</div>
+</section>
+
+<!-- P2: Projects -->
+<section class="page" data-page="1">
+<div class="page-inner">
+<div class="projects-grid">
+<div class="card">
+<div class="thumb"><svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0533"/><stop offset="100%" stop-color="#0d0221"/></linearGradient></defs><rect width="320" height="200" fill="url(#g1)"/><rect x="200" y="0" width="120" height="200" fill="#0b001a" opacity=".6"/><rect x="8" y="8" width="184" height="28" rx="6" fill="rgba(168,85,247,.15)"/><circle cx="22" cy="22" r="6" fill="#A855F7" opacity=".6"/><text x="34" y="26" fill="#D8B4FE" font-size="10" font-family="monospace">Chatty-Bot</text><rect x="20" y="48" width="100" height="24" rx="6" fill="rgba(168,85,247,.2)"/><rect x="80" y="80" width="110" height="24" rx="6" fill="rgba(139,92,246,.15)"/><rect x="20" y="112" width="90" height="24" rx="6" fill="rgba(168,85,247,.2)"/><circle cx="16" cy="120" r="4" fill="#A855F7" opacity=".5"/><rect x="20" y="160" width="170" height="20" rx="8" fill="rgba(255,255,255,.06)"/><circle cx="178" cy="170" r="4" fill="#FF6B35"/><text x="70" y="156" fill="#68687A" font-size="7" font-family="monospace">Powered by Qwen-3B</text></svg></div>
+<div class="body">
+<div class="badge"><span class="type-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M22 12h-4M12 20v4M4 12H2"/></svg></span>AI桌面助手 &middot; 全栈开发</div>
+<h3>Chatty-Bot</h3>
+<p class="desc">4GB显存跑通 Qwen-3B 本地推理，全链路自研</p>
+
+<div class="highlight">★ 攻克4GB显存部署大模型难题</div>
+<div class="tags"><span class="tag">Python</span><span class="tag">PyQt</span><span class="tag">QLoRA</span></div>
+</div>
+</div>
+<div class="card">
+<div class="thumb"><svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a2e1a"/><stop offset="100%" stop-color="#051a0f"/></linearGradient></defs><rect width="320" height="200" fill="url(#g2)"/><rect x="60" y="30" width="200" height="130" rx="8" fill="#120824" stroke="rgba(168,85,247,.15)" stroke-width="1" transform="rotate(-6,160,95)"/><rect x="75" y="38" width="170" height="22" rx="4" fill="rgba(168,85,247,.08)"/><text x="120" y="54" fill="#D8B4FE" font-size="9" font-family="monospace">Spade A</text><rect x="80" y="30" width="200" height="130" rx="8" fill="#150a30" stroke="rgba(255,107,53,.2)" stroke-width="1" transform="rotate(4,160,95)"/><rect x="95" y="38" width="170" height="22" rx="4" fill="rgba(255,107,53,.08)"/><text x="140" y="54" fill="#FF6B35" font-size="9" font-family="monospace">Heart K</text><rect x="70" y="50" width="180" height="110" rx="8" fill="#0d0420" stroke="rgba(255,255,255,.1)" stroke-width=".5" transform="rotate(0,160,105)"/><text x="110" y="90" fill="#C8C8D0" font-size="7" font-family="monospace">Room: 452631</text><text x="110" y="105" fill="#68687A" font-size="6" font-family="monospace">Waiting for players...</text><circle cx="150" cy="130" r="6" fill="#FF6B35" opacity=".6"/><circle cx="170" cy="130" r="6" fill="#A855F7" opacity=".4"/><circle cx="190" cy="130" r="6" fill="#A855F7" opacity=".4"/></svg></div>
+<div class="body">
+<div class="badge"><span class="type-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="16" rx="2"/><path d="M8 7h8M8 11h6M8 15h4"/></svg></span>微信小程序 &middot; 独立开发</div>
+<h3>聚会翻牌器</h3>
+<p class="desc">实时同步翻牌小程序，已备案上架</p>
+
+<div class="highlight">★ 已备案上架·完整产品落地</div>
+<div class="tags"><span class="tag">小程序</span><span class="tag">云开发</span><span class="tag">JS</span></div>
+</div>
+</div>
+<div class="card">
+<div class="thumb"><svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#020617"/></linearGradient></defs><rect width="320" height="200" fill="url(#g3)"/><circle cx="160" cy="100" r="24" fill="none" stroke="#FF6B35" stroke-width="1" opacity=".3"/><circle cx="160" cy="100" r="20" fill="#FF6B35" opacity=".08"/><text x="146" y="105" fill="#FF6B35" font-size="8" font-family="monospace" font-weight="bold">MCU</text><circle cx="70" cy="60" r="14" fill="none" stroke="#A855F7" stroke-width=".8" opacity=".4"/><circle cx="70" cy="60" r="11" fill="#A855F7" opacity=".06"/><text x="57" y="64" fill="#A855F7" font-size="7" font-family="monospace">S1</text><circle cx="250" cy="60" r="14" fill="none" stroke="#A855F7" stroke-width=".8" opacity=".4"/><circle cx="250" cy="60" r="11" fill="#A855F7" opacity=".06"/><text x="237" y="64" fill="#A855F7" font-size="7" font-family="monospace">S2</text><circle cx="160" cy="160" r="14" fill="none" stroke="#A855F7" stroke-width=".8" opacity=".4"/><circle cx="160" cy="160" r="11" fill="#A855F7" opacity=".06"/><text x="147" y="164" fill="#A855F7" font-size="7" font-family="monospace">S3</text><line x1="84" y1="60" x2="140" y2="100" stroke="#FF6B35" stroke-width=".6" opacity=".25"/><line x1="236" y1="60" x2="180" y2="100" stroke="#FF6B35" stroke-width=".6" opacity=".25"/><line x1="160" y1="120" x2="160" y2="146" stroke="#FF6B35" stroke-width=".6" opacity=".25"/><rect x="40" y="170" width="6" height="12" rx="1" fill="#FF6B35" opacity=".35"/><rect x="48" y="170" width="6" height="12" rx="1" fill="#FF6B35" opacity=".25"/><rect x="56" y="170" width="6" height="12" rx="1" fill="#FF6B35" opacity=".15"/><rect x="266" y="170" width="6" height="12" rx="1" fill="#A855F7" opacity=".35"/><rect x="274" y="170" width="6" height="12" rx="1" fill="#A855F7" opacity=".25"/><rect x="282" y="170" width="6" height="12" rx="1" fill="#A855F7" opacity=".15"/><text x="90" y="188" fill="#68687A" font-size="6" font-family="monospace">UDP  Sense-Decide-Act</text></svg></div>
+<div class="body">
+<div class="badge"><span class="type-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M12 8v8M8 12h8"/></svg></span>嵌入式系统 &middot; 核心开发</div>
+<h3>分布式智能家居语音控制系统</h3>
+<p class="desc">3块STM32分布式控制系统，软硬全栈</p>
+
+<div class="highlight">★ 多节点分布式 + AI决策联动</div>
+<div class="tags"><span class="tag">STM32</span><span class="tag">Qt/C++</span><span class="tag">UDP</span></div>
+</div>
+<div class="tool-icons">
+<div class="ti" title="Python"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M22 12h-4M12 20v4M4 12H2"/></svg></div>
+<div class="ti" title="Docker"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h2v2H9zM13 9h2v2h-2zM9 13h2v2H9z"/></svg></div>
+<div class="ti" title="Git"><svg viewBox="0 0 24 24"><circle cx="12" cy="18" r="3"/><path d="M12 15V6M9 9l3-3 3 3"/></svg></div>
+<div class="ti" title="Ollama"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 6 6 6 10c0 4 2 8 6 8s6-4 6-8c0-4-2-8-6-8z"/><path d="M12 18v4M9 22h6"/></svg></div>
+<div class="ti" title="STM32"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 8h8v8H8z"/><path d="M12 8v8M8 12h8"/></svg></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- P3: About -->
+<section class="page" data-page="2">
+<div class="page-inner">
+<div class="about-wrap">
+<div class="about-left">
+<p class="intro">从STM32到QLoRA，技术路径清晰的全链路开发者。</p>
+<div class="keys"><span>硬件底子</span><span>AI实践</span><span>产品落地</span></div>
+<p class="desc">电子信息工程本科（大连大学，2026届），辩论队负责人。从硬件底层到AI模型部署，独立走过多个完整项目。</p>
+<div class="skills-grid">
+<div class="skill-group">
+<div class="sg-title"><svg class="sg-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>硬件层</div>
+<div class="sg-tags"><span class="sg-tag">C</span><span class="sg-tag">STM32</span><span class="sg-tag">UART/SPI</span><span class="sg-tag">UDP</span><span class="sg-tag">焊接调试</span></div>
+</div>
+<div class="skill-group">
+<div class="sg-title"><svg class="sg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M22 12h-4M12 20v4M4 12H2"/></svg>AI / 数据</div>
+<div class="sg-tags"><span class="sg-tag">Python</span><span class="sg-tag">Ollama</span><span class="sg-tag">QLoRA</span><span class="sg-tag">n8n</span></div>
+</div>
+<div class="skill-group">
+<div class="sg-title"><svg class="sg-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>应用开发</div>
+<div class="sg-tags"><span class="sg-tag">Qt/PyQt</span><span class="sg-tag">小程序</span><span class="sg-tag">Docker</span><span class="sg-tag">Git/Linux</span></div>
+</div>
+</div>
+</div>
+<div class="about-right">
+<p class="section-label">联系方式</p>
+<div class="row"><span class="key">邮箱</span><span class="val">1446974278@qq.com</span></div>
+<div class="row"><span class="key">微信</span><span class="val">15112188850</span></div>
+<div class="row"><span class="key">求职</span><span class="val">嵌入式软件开发 / AI应用开发</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="nav-dots" id="navDots">
+<button class="nav-dot active" data-page="0"></button>
+<button class="nav-dot" data-page="1"></button>
+<button class="nav-dot" data-page="2"></button>
+</div>
+<button class="nav-arrow prev hidden" id="prevArrow">&lsaquo;</button>
+<button class="nav-arrow next" id="nextArrow">&rsaquo;</button>
+</div>
+
+<script>
+(function(){var p=document.querySelectorAll('.page'),d=document.querySelectorAll('.nav-dot'),pr=document.getElementById('prevArrow'),nx=document.getElementById('nextArrow'),c=0,a=false;
+function u(){d.forEach(function(x,i){x.classList.toggle('active',i===c)});pr.classList.toggle('hidden',c===0);nx.classList.toggle('hidden',c===2)}
+function g(i){if(a||i===c||i<0||i>2)return;a=true;p[c].classList.remove('active');p[i].classList.add('active');c=i;u();setTimeout(function(){a=false},520)}
+pr.addEventListener('click',function(){g(c-1)});nx.addEventListener('click',function(){g(c+1)})
+d.forEach(function(x){x.addEventListener('click',function(){g(parseInt(this.dataset.page))})})
+document.addEventListener('keydown',function(e){if(c>0&&(e.key==='ArrowLeft'||e.key==='ArrowUp'))g(c-1);if(c<2&&(e.key==='ArrowRight'||e.key==='ArrowDown'))g(c+1)})
+;(function(){var s=0;document.addEventListener('touchstart',function(e){s=e.touches[0].clientX},{passive:true});document.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-s;if(Math.abs(dx)>50){if(dx>0)g(c-1);else g(c+1)}},{passive:true})})();
+;(function(){var b=document.getElementById('theme-btn'),m=localStorage.getItem('theme');if(m==='dark'){document.documentElement.classList.add('dark');b.innerHTML='&#x2600;'}b.addEventListener('click',function(){var t=document.documentElement.classList.toggle('dark');localStorage.setItem('theme',t?'dark':'light');b.innerHTML=t?'&#x2600;':'&#x25D0;'})})();
+window.goPage=g})();
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>韦文轩 - 嵌入式软件开发</title>
+<style>
+  @page { margin: 1.8cm 1.5cm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    color: #222; background: #fff; font-size: 10pt; line-height: 1.5;
+    max-width: 210mm; margin: 0 auto; padding: 0 15px;
+  }
+
+  /* Header */
+  .header { text-align: center; padding: 28px 0 14px; border-bottom: 2px solid #1a5276; margin-bottom: 16px; }
+  .header h1 { font-size: 24pt; font-weight: 700; color: #1a5276; letter-spacing: 4px; margin-bottom: 2px; }
+  .header .subtitle { font-size: 11pt; color: #555; margin-bottom: 8px; }
+  .header .contact { font-size: 9pt; color: #444; display: flex; justify-content: center; gap: 0 20px; flex-wrap: wrap; }
+  .header .contact span { white-space: nowrap; }
+  .header .contact .label { color: #888; }
+
+  /* Sections */
+  .section { margin-bottom: 14px; }
+  .section-title {
+    font-size: 11pt; font-weight: 700; color: #1a5276;
+    padding-bottom: 4px; border-bottom: 1px solid #d0d0d0; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .section-title::before { content: ""; display: inline-block; width: 3px; height: 14px; background: #1a5276; border-radius: 2px; }
+
+  /* Summary */
+  .summary { font-size: 9.5pt; color: #333; line-height: 1.6; padding: 0 2px; }
+  .summary strong { color: #1a5276; }
+
+  /* Skills */
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 4px 0; font-size: 9.5pt; }
+  .skill-group { width: 50%; padding: 2px 6px 2px 0; }
+  .skill-group .sg-label { font-weight: 600; color: #1a5276; font-size: 9pt; display: inline-block; min-width: 68px; }
+  .skill-group .sg-items { color: #333; }
+
+  /* Experience items */
+  .exp-item { margin-bottom: 12px; page-break-inside: avoid; }
+  .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+  .exp-header .exp-title { font-size: 10.5pt; font-weight: 700; color: #1a5276; }
+  .exp-header .exp-company { font-size: 10pt; font-weight: 600; color: #333; }
+  .exp-header .exp-date { font-size: 9pt; color: #888; white-space: nowrap; }
+  .exp-header .exp-tech { font-size: 8.5pt; color: #666; font-weight: 400; }
+  .exp-desc { font-size: 9pt; color: #333; padding-left: 0; margin-top: 3px; }
+  .exp-desc ul { list-style: none; padding-left: 0; }
+  .exp-desc ul li { position: relative; padding-left: 12px; margin-bottom: 2px; }
+  .exp-desc ul li::before { content: ""; position: absolute; left: 0; top: 6px; width: 4px; height: 4px; background: #1a5276; border-radius: 50%; }
+  .exp-desc .highlight { background: #eaf4fb; padding: 1px 4px; border-radius: 2px; font-weight: 500; color: #1a5276; }
+
+  /* Project highlight box */
+  .highlight-box { background: #f5f8fb; border-left: 3px solid #1a5276; padding: 5px 10px; margin-top: 4px; font-size: 8.5pt; color: #444; border-radius: 0 3px 3px 0; }
+
+  /* Education */
+  .edu-item { display: flex; justify-content: space-between; align-items: baseline; font-size: 9.5pt; }
+  .edu-item .edu-left { font-weight: 600; }
+  .edu-item .edu-right { color: #888; }
+  .edu-detail { font-size: 8.5pt; color: #666; margin-top: 2px; }
+  .edu-detail .gpa-note { color: #999; font-size: 8pt; }
+
+  /* Campus */
+  .campus-grid { display: flex; flex-wrap: wrap; gap: 3px 0; font-size: 9pt; }
+  .campus-item { width: 50%; padding: 2px 8px 2px 0; }
+  .campus-item .c-label { font-weight: 600; color: #1a5276; display: inline-block; min-width: 72px; }
+  .campus-item .c-text { color: #333; }
+
+  @media print {
+    body { padding: 0; }
+    .header { padding-top: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>韦文轩</h1>
+  <div class="subtitle">嵌入式软件开发 · 电子信息工程本科（2026届）</div>
+  <div class="contact">
+    <span><span class="label">电话</span> 15112188850</span>
+    <span><span class="label">邮箱</span> 1446974278@qq.com</span>
+    <span><span class="label">地址</span> 广西梧州市</span>
+    <span><span class="label">驾照</span> C1 · 3年</span>
+    <span>可接受全国出差</span>
+  </div>
+</div>
+
+<!-- ===== 个人摘要 ===== -->
+<div class="section">
+  <div class="section-title">个人摘要</div>
+  <div class="summary">
+    电子信息工程本科，具备从<strong>硬件底层到嵌入式软件</strong>的完整工程能力。独立完成STM32分布式系统（多节点协同+UDP通信协议设计）、Qt桌面应用（三层架构+SQLite持久化）等完整项目落地。熟悉<strong>C/C++、STM32平台、通信协议（UART/SPI/IIC/UDP）</strong>，同时具备AI模型部署的全栈视野。信息工程学院辩论队负责人，沟通逻辑清晰，抗压能力强。
+  </div>
+</div>
+
+<!-- ===== 专业技能 ===== -->
+<div class="section">
+  <div class="section-title">专业技能</div>
+  <div class="skills-grid">
+    <div class="skill-group"><span class="sg-label">编程语言</span><span class="sg-items">C / C++ / Python / JavaScript / VHDL</span></div>
+    <div class="skill-group"><span class="sg-label">嵌入式开发</span><span class="sg-items">STM32 / UART · SPI · IIC / GPIO / UDP · TCP</span></div>
+    <div class="skill-group"><span class="sg-label">硬件工具</span><span class="sg-items">Altium Designer / 嘉立创 / Proteus / 示波器 · 万用表</span></div>
+    <div class="skill-group"><span class="sg-label">应用开发</span><span class="sg-items">Qt / PyQt6 / 微信小程序 / SQLite / CMake</span></div>
+    <div class="skill-group"><span class="sg-label">AI / 模型部署</span><span class="sg-items">Ollama / QLoRA 微调 / Docker / n8n 工作流</span></div>
+    <div class="skill-group"><span class="sg-label">开发环境</span><span class="sg-items">Linux / Git / Keil uVision / Proteus</span></div>
+  </div>
+</div>
+
+<!-- ===== 项目经历 ===== -->
+<div class="section">
+  <div class="section-title">项目经历</div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">分布式智能家居语音控制系统</span>
+      <span class="exp-date">2025.10</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-tech">STM32 / Qt (C++) / UDP通信 / 语音识别 / AI决策引擎</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>设计 <span class="highlight">3个STM32节点的分布式架构</span>：传感器节点（DHT11温湿度+光敏电阻）采集环境数据，执行器节点（继电器模块）控制风扇/灯光，主控节点协调通信</li>
+        <li>制定完整的 <span class="highlight">UDP通信协议</span>（数据帧格式 + 节点寻址 + 错误重传），实现多节点可靠数据交换</li>
+        <li>Qt控制中心集成AI决策引擎，实现 <span class="highlight">"感知→决策→执行"完整闭环</span>（温度>28℃自动开风扇，光照<200lux自动开灯）</li>
+        <li>集成语音识别模块，支持 <span class="highlight">自然语言控制</span>家电设备（"打开客厅灯"、"温度调高一点"）</li>
+      </ul>
+      <div class="highlight-box">核心亮点：多节点分布式系统架构设计 &amp; 通信协议自定 &amp; AI模型与嵌入式设备联动决策</div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">Chatty-Bot 个性化AI桌面助手</span>
+      <span class="exp-date">2026.01 – 2026.05</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-tech">Python / PyQt6 / Ollama / QLoRA / n8n / Docker</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>设计"云端训练 + 本地推理"混合架构，在AutoDL云平台完成 <span class="highlight">Qwen2.5-3B的QLoRA微调</span>，经GGUF量化后通过Ollama部署</li>
+        <li>攻克 <span class="highlight">消费级4GB显存部署大模型</span> 的工程难题，实现本地推理仅需2.5秒</li>
+        <li>基于n8n设计 <span class="highlight">双AI Agent工作流</span>（意图分类Agent → 主模型回复Agent），集成天气查询、任务提醒及主动提醒</li>
+        <li>开发PyQt6桌面客户端：无边框暗色/亮色主题切换、任务卡片倒计时、聊天历史SQLite持久化，打包为 <span class="highlight">exe一键安装包</span></li>
+      </ul>
+      <div class="highlight-box">核心亮点：独立攻克4GB显存部署大模型；从模型微调到前端交付的全栈能力</div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">物品借出存入管理系统</span>
+      <span class="exp-date">2025.09</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-tech">Qt (C++) / SQLite / CMake</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>采用 <span class="highlight">三层架构（界面层-业务逻辑层-数据访问层）+ 单例模式</span> 开发桌面管理系统</li>
+        <li>以电话号码为用户唯一标识自动注册，支持物品数量追踪、<span class="highlight">部分借出</span>、借还记录及操作日志全流程追溯</li>
+      </ul>
+      <div class="highlight-box">核心亮点：完整的软件工程实践（三层架构 + 模块化设计 + 持久化）</div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">聚会翻牌器 · 微信小程序</span>
+      <span class="exp-date">2025.05 – 2025.06</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-tech">微信小程序 / 云开发 / JavaScript / 实时同步</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>独立开发 <span class="highlight">多人实时同步</span> 翻牌小程序，设计6位数字房号系统（创建/加入/退出/断线重连）</li>
+        <li>实现52张扑克牌 <span class="highlight">Fisher-Yates洗牌算法</span>、轮流抽牌逻辑、特殊身份牌持续提示</li>
+        <li>使用云数据库watch实现多人实时状态同步，解决字段更新冲突、界面频繁刷新超时等难题</li>
+      </ul>
+      <div class="highlight-box">核心亮点：已完成备案上架，具备完整的产品落地经验</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 实习经历 ===== -->
+<div class="section">
+  <div class="section-title">实习经历</div>
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">助理工程师（实习）</span>
+      <span class="exp-date">2026.03 – 2026.06</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-company">深圳吉质科技有限公司 · 研发部</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>协助完成电路板<span class="highlight">焊接、功能测试及基础故障排查</span>，参与嵌入式产品功能验证</li>
+        <li>使用示波器、万用表等仪器对电路板进行信号测量，协助定位硬件问题</li>
+        <li>负责技术文档归档、BOM表整理及元器件库存管理</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 教育背景 ===== -->
+<div class="section">
+  <div class="section-title">教育背景</div>
+  <div class="edu-item">
+    <div class="edu-left">大连大学 · 电子信息工程 · 本科</div>
+    <div class="edu-right">2022.09 – 2026.06</div>
+  </div>
+  <div class="edu-detail">
+    主修课程：数字信号处理 · 通信原理 · EDA技术及应用 · 信号与系统 · 单片机原理及应用 · 电路原理 · 数字电路 · 模拟电路
+    <span class="gpa-note"> | GPA 2.31/4.0</span>
+  </div>
+</div>
+
+<!-- ===== 校园与实践 ===== -->
+<div class="section">
+  <div class="section-title">校园与实践</div>
+  <div class="campus-grid">
+    <div class="campus-item"><span class="c-label">辩论队</span><span class="c-text">信息工程学院辩论队负责人，组织校级辩论赛10余场，多次获"最佳辩手"</span></div>
+    <div class="campus-item"><span class="c-label">志愿服务</span><span class="c-text">累计志愿服务超100小时</span></div>
+    <div class="campus-item"><span class="c-label">社会实践</span><span class="c-text">寒暑假家教、销售等兼职，锻炼沟通与适应能力</span></div>
+    <div class="campus-item"><span class="c-label">英语能力</span><span class="c-text">能流畅阅读英文技术文档（12月备考四级）</span></div>
+  </div>
+</div>
+
+</body>
+</html>

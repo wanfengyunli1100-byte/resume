@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>韦文轩 - AI应用开发</title>
+<style>
+  @page { margin: 1.8cm 1.5cm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    color: #222; background: #fff; font-size: 10pt; line-height: 1.5;
+    max-width: 210mm; margin: 0 auto; padding: 0 15px;
+  }
+
+  .header { text-align: center; padding: 28px 0 14px; border-bottom: 2px solid #0d7377; margin-bottom: 16px; }
+  .header h1 { font-size: 24pt; font-weight: 700; color: #0d7377; letter-spacing: 4px; margin-bottom: 2px; }
+  .header .subtitle { font-size: 11pt; color: #555; margin-bottom: 8px; }
+  .header .contact { font-size: 9pt; color: #444; display: flex; justify-content: center; gap: 0 20px; flex-wrap: wrap; }
+  .header .contact span { white-space: nowrap; }
+  .header .contact .label { color: #888; }
+
+  .section { margin-bottom: 14px; }
+  .section-title {
+    font-size: 11pt; font-weight: 700; color: #0d7377;
+    padding-bottom: 4px; border-bottom: 1px solid #d0d0d0; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .section-title::before { content: ""; display: inline-block; width: 3px; height: 14px; background: #0d7377; border-radius: 2px; }
+
+  .summary { font-size: 9.5pt; color: #333; line-height: 1.6; padding: 0 2px; }
+  .summary strong { color: #0d7377; }
+
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 4px 0; font-size: 9.5pt; }
+  .skill-group { width: 50%; padding: 2px 6px 2px 0; }
+  .skill-group .sg-label { font-weight: 600; color: #0d7377; font-size: 9pt; display: inline-block; min-width: 72px; }
+  .skill-group .sg-items { color: #333; }
+
+  .exp-item { margin-bottom: 12px; page-break-inside: avoid; }
+  .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+  .exp-header .exp-title { font-size: 10.5pt; font-weight: 700; color: #0d7377; }
+  .exp-header .exp-company { font-size: 10pt; font-weight: 600; color: #333; }
+  .exp-header .exp-date { font-size: 9pt; color: #888; white-space: nowrap; }
+  .exp-header .exp-tech { font-size: 8.5pt; color: #666; font-weight: 400; }
+  .exp-desc { font-size: 9pt; color: #333; padding-left: 0; margin-top: 3px; }
+  .exp-desc ul { list-style: none; padding-left: 0; }
+  .exp-desc ul li { position: relative; padding-left: 12px; margin-bottom: 2px; }
+  .exp-desc ul li::before { content: ""; position: absolute; left: 0; top: 6px; width: 4px; height: 4px; background: #0d7377; border-radius: 50%; }
+  .exp-desc .highlight { background: #e0f2f4; padding: 1px 4px; border-radius: 2px; font-weight: 500; color: #0d7377; }
+
+  .highlight-box { background: #f0f8f9; border-left: 3px solid #0d7377; padding: 5px 10px; margin-top: 4px; font-size: 8.5pt; color: #444; border-radius: 0 3px 3px 0; }
+
+  .edu-item { display: flex; justify-content: space-between; align-items: baseline; font-size: 9.5pt; }
+  .edu-item .edu-left { font-weight: 600; }
+  .edu-item .edu-right { color: #888; }
+  .edu-detail { font-size: 8.5pt; color: #666; margin-top: 2px; }
+  .edu-detail .gpa-note { color: #999; font-size: 8pt; }
+
+  .campus-grid { display: flex; flex-wrap: wrap; gap: 3px 0; font-size: 9pt; }
+  .campus-item { width: 50%; padding: 2px 8px 2px 0; }
+  .campus-item .c-label { font-weight: 600; color: #0d7377; display: inline-block; min-width: 72px; }
+  .campus-item .c-text { color: #333; }
+
+  @media print {
+    body { padding: 0; }
+    .header { padding-top: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>韦文轩</h1>
+  <div class="subtitle">AI应用开发 · Agent系统研发 · 电子信息工程本科（2026届）</div>
+  <div class="contact">
+    <span><span class="label">电话</span> 15112188850</span>
+    <span><span class="label">邮箱</span> 1446974278@qq.com</span>
+    <span><span class="label">地址</span> 广西梧州市</span>
+    <span>可接受全国出差</span>
+  </div>
+</div>
+
+<!-- ===== 个人摘要 ===== -->
+<div class="section">
+  <div class="section-title">个人摘要</div>
+  <div class="summary">
+    电子信息工程本科，具备从<strong>模型微调 → Agent工作流设计 → 应用交付</strong>的AI全链路工程能力。独立完成Qwen2.5-3B的QLoRA微调及GGUF量化部署，在<strong>4GB消费级显卡</strong>上实现2.5秒本地推理。基于n8n设计双AI Agent工作流，开发PyQt6桌面应用并交付exe安装包。同时具备嵌入式系统开发经验（STM32分布式系统、UDP通信协议自定），能将AI能力与硬件系统深度融合。辩论队负责人，沟通逻辑清晰。
+  </div>
+</div>
+
+<!-- ===== 专业技能 ===== -->
+<div class="section">
+  <div class="section-title">专业技能</div>
+  <div class="skills-grid">
+    <div class="skill-group"><span class="sg-label">AI / 大模型</span><span class="sg-items">Ollama 部署 / QLoRA 微调 (Qwen) / Agent 工作流设计</span></div>
+    <div class="skill-group"><span class="sg-label">编程语言</span><span class="sg-items">Python / C / C++ / JavaScript</span></div>
+    <div class="skill-group"><span class="sg-label">工具链</span><span class="sg-items">n8n / Docker / REST API / Git / Linux</span></div>
+    <div class="skill-group"><span class="sg-label">应用开发</span><span class="sg-items">PyQt6 / 微信小程序 / SQLite / CMake</span></div>
+    <div class="skill-group"><span class="sg-label">嵌入式</span><span class="sg-items">STM32 / UART · SPI · IIC / UDP · TCP</span></div>
+    <div class="skill-group"><span class="sg-label">数据格式</span><span class="sg-items">JSON / GGUF / QLoRA Adapter / SQL</span></div>
+  </div>
+</div>
+
+<!-- ===== 项目经历 ===== -->
+<div class="section">
+  <div class="section-title">项目经历</div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">Chatty-Bot 个性化AI桌面助手</span>
+      <span class="exp-date">2026.01 – 2026.05</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-tech">Python / PyQt6 / Ollama / QLoRA / n8n / Docker</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>设计 <span class="highlight">"云端训练 + 本地推理"混合架构</span>：在AutoDL云平台完成Qwen2.5-3B的QLoRA微调，经GGUF量化后通过Ollama部署至本地</li>
+        <li>攻克 <span class="highlight">消费级4GB显存运行大语言模型</span> 的工程瓶颈，实现本地推理仅需2.5秒</li>
+        <li>基于n8n设计 <span class="highlight">双AI Agent工作流</span>：意图分类Agent（任务识别和槽位提取）→ 主模型回复Agent（个性生成），集成天气查询、任务提醒、主动通知</li>
+        <li>开发PyQt6桌面客户端：无边框暗色/亮色主题切换、任务卡片倒计时、聊天历史SQLite持久化，<span class="highlight">打包为exe一键安装包</span></li>
+        <li>解决n8n访问宿主机Ollama服务、中文编码异常、自然语言时间解析等关键工程问题</li>
+      </ul>
+      <div class="highlight-box">核心亮点：独立攻克4GB显存LLM部署难题 · 双Agent工作流设计 · 从模型微调到交付的全链路实践</div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">分布式智能家居AI语音控制系统</span>
+      <span class="exp-date">2025.10</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-tech">STM32 / Qt (C++) / UDP通信 / 语音识别 / AI决策引擎</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>设计3个STM32节点的分布式架构：传感器节点采集环境数据 → AI决策引擎分析 → 执行器节点自动控制</li>
+        <li>Qt控制中心集成 <span class="highlight">AI决策引擎</span>，实现感知-决策-执行闭环（温度>28℃自动开风扇，光照<200lux自动开灯）</li>
+        <li>集成语音识别模块，支持 <span class="highlight">自然语言控制</span>家电（"打开客厅灯"、"温度调高一点"）</li>
+      </ul>
+      <div class="highlight-box">核心亮点：AI模型与嵌入式设备的联动决策 · 多节点分布式架构</div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">物品借出存入管理系统</span>
+      <span class="exp-date">2025.09</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-tech">Qt (C++) / SQLite / CMake</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>采用三层架构（界面层-业务逻辑层-数据访问层）+ 单例模式开发桌面管理系统</li>
+        <li>以电话号码为用户唯一标识自动注册，支持物品数量追踪、部分借出、借还记录及操作日志全流程追溯</li>
+      </ul>
+      <div class="highlight-box">核心亮点：完整软件工程实践 · 三层架构 + 模块化设计</div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">聚会翻牌器 · 微信小程序</span>
+      <span class="exp-date">2025.05 – 2025.06</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-tech">微信小程序 / 云开发 / JavaScript / 实时同步</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>独立开发多人实时同步翻牌小程序，设计6位数字房号系统（创建/加入/退出/断线重连）</li>
+        <li>实现Fisher-Yates洗牌算法、轮流抽牌、特殊身份牌持续提示</li>
+        <li>使用云数据库watch实现多人状态实时同步，解决字段更新冲突、界面频繁刷新超时等难题</li>
+      </ul>
+      <div class="highlight-box">核心亮点：已完成备案上架 · 完整产品落地经验</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 实习经历 ===== -->
+<div class="section">
+  <div class="section-title">实习经历</div>
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-title">助理工程师（实习）</span>
+      <span class="exp-date">2026.03 – 2026.06</span>
+    </div>
+    <div class="exp-header" style="margin-bottom:3px;">
+      <span class="exp-company">深圳吉质科技有限公司 · 研发部</span>
+    </div>
+    <div class="exp-desc">
+      <ul>
+        <li>协助完成电路板焊接、功能测试及故障排查，参与嵌入式产品功能验证</li>
+        <li>使用示波器、万用表等仪器进行信号测量与问题定位</li>
+        <li>负责技术文档归档、BOM表整理及元器件库存管理</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 教育背景 ===== -->
+<div class="section">
+  <div class="section-title">教育背景</div>
+  <div class="edu-item">
+    <div class="edu-left">大连大学 · 电子信息工程 · 本科</div>
+    <div class="edu-right">2022.09 – 2026.06</div>
+  </div>
+  <div class="edu-detail">
+    主修课程：数字信号处理 · 通信原理 · 信号与系统 · 单片机原理 · 电路原理 · 模拟/数字电路
+    <span class="gpa-note"> | GPA 2.31/4.0</span>
+  </div>
+</div>
+
+<!-- ===== 校园与实践 ===== -->
+<div class="section">
+  <div class="section-title">校园与实践</div>
+  <div class="campus-grid">
+    <div class="campus-item"><span class="c-label">辩论队</span><span class="c-text">信息工程学院辩论队负责人，组织校级辩论赛10余场，多次获"最佳辩手"</span></div>
+    <div class="campus-item"><span class="c-label">志愿服务</span><span class="c-text">累计志愿服务超100小时</span></div>
+    <div class="campus-item"><span class="c-label">社会实践</span><span class="c-text">寒暑假家教、销售等兼职；宿舍小卖部创业（覆盖约360人）</span></div>
+    <div class="campus-item"><span class="c-label">英语</span><span class="c-text">能流畅阅读英文技术文档，12月备考四级中</span></div>
+    <div class="campus-item"><span class="c-label">驾照</span><span class="c-text">C1，3年驾驶经验，可接受全国出差</span></div>
+  </div>
+</div>
+
+</body>
+</html>
