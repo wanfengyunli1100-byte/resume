@@ -1,0 +1,18 @@
+# Test & temp files
+test_*
+_gen_*.*
+_test.*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Generated resumes (use git add -f if needed)
+简历/
+gen_full_resume.py
+resume_od_new.html
+
+# Editor files
+*.swp
+*.swo
+*~
